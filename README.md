@@ -1,13 +1,21 @@
-# Advanced-Data-Mining — Optimization Examples
+# Advanced-Data-Mining — Experimental Data Mining Algorithms
 
-Small repository with minimal implementations of two population-based optimizers:
+This repository is for experimenting with new data-mining and metaheuristic
+algorithms. It contains minimal, experimental implementations and example
+runners used to prototype and compare search strategies (for example PSO and
+SCA) and to collect convergence data for analysis.
 
-- `PSO.py` — minimal Particle Swarm Optimization (PSO) minimizer
-- `SCA.py` — minimal Sine-Cosine Algorithm (SCA) minimizer
-- `run_pso_minimal.py` — runner that applies `PSO` to the Ackley function (2-D)
-- `run_SCA_minimal.py` — runner that applies `SCA` to the Ackley function (2-D)
+The workspace includes minimal implementations and example runners for several
+optimizers and local-search methods (organized into subfolders):
 
-Other scripts in the workspace may exist for different experiments.
+- `PSO/` — Particle Swarm Optimization implementation and runner
+- `SCA/` — Sine-Cosine Algorithm implementation and runner
+- `BPBO/` — (experimental) BPBO implementation and related runners
+- `HillClimb/` — simple hill-climbing / local search utilities
+- `Gen/` — experimental genetic / generational algorithms and runner
+
+Each folder contains a small, focused implementation and one or more example
+runner scripts you can execute to reproduce experiments.
 
 ## Quick start
 
@@ -36,10 +44,11 @@ Both example runners print the best-found position and objective value. They are
 
 ## Files and purpose
 
-- `PSO.py` — exposes `PSO(func, bounds, num_particles=30, max_iter=100, seed=None)` and returns `(best_x, best_f)`.
-- `SCA.py` — exposes `SCA(func, bounds, num_agents=30, max_iter=100, seed=None)` and returns `(best_x, best_f)`.
-- `run_pso_minimal.py` — defines the Ackley function with recommended parameters (a=20, b=0.2, c=2\*pi) and calls `PSO` with a 2-D search space.
-- `run_SCA_minimal.py` — same as above but calls `SCA`.
+- `PSO/PSO.py` — exposes `PSO(func, bounds, num_particles=30, max_iter=100, seed=None)` and returns `(best_x, best_f)`; `PSO/run_pso_minimal.py` is an example runner.
+- `SCA/SCA.py` — exposes `SCA(func, bounds, num_agents=30, max_iter=100, seed=None)` and returns `(best_x, best_f)`; `SCA/run_SCA_minimal.py` is an example runner.
+- `BPBO/BPBO.py` — experimental BPBO implementation; `BPBO/runBPBO.py`, `BPBO/runpbpo.py`, `BPBO/runlevy.py` are example runners/scripts present in the folder.
+- `HillClimb/hillclimb.py` — local hill-climbing utility for refining candidate solutions.
+- `Gen/Gen.py` and `Gen/run_gen.py` — simple genetic/generational algorithm implementations and a runner for experimentation.
 
 ## Ackley function used in runners
 
