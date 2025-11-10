@@ -1,0 +1,4 @@
+# Minimal runtime requirements for the examples in this repo
+# Use a recent Python 3 (3.8+ recommended)
+numpy>=1.21,<2
+matplotlib>=3.4,<4
