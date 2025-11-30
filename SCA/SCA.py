@@ -3,7 +3,7 @@
 Exposes SCA(func, bounds, num_agents=30, max_iter=100, seed=None) -> (best_x, best_f)
 """
 
-from typing import Callable, Sequence, Tuple, Optional
+from typing import Callable, Sequence, Tuple, Optional, List
 import numpy as np
 
 
@@ -13,7 +13,8 @@ def SCA(
     num_agents: int = 30,
     max_iter: int = 100,
     seed: Optional[int] = None,
-):
+    return_history: bool = False,
+) -> Tuple[np.ndarray, float] | Tuple[np.ndarray, float, List[float]]:
     """Run a minimal Sine-Cosine Algorithm to minimize `func`.
 
     Parameters
@@ -43,6 +44,8 @@ def SCA(
     best_x = X[best_idx].copy()
     best_f = float(fitness[best_idx])
 
+    history: List[float] = []
+
     # SCA loop
     for t in range(max_iter):
         r1 = 2 - t * (2 / max_iter)  # linearly decreasing from 2 to 0
@@ -69,5 +72,10 @@ def SCA(
             best_f = float(fitness[min_idx])
             best_x = X[min_idx].copy()
 
+        if return_history:
+            history.append(best_f)
+
+    if return_history:
+        return best_x, best_f, history
     return best_x, best_f
 

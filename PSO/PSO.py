@@ -7,7 +7,7 @@ objective. It keeps the API minimal: `func`, `bounds`, `num_particles`,
 There is also a tiny `__main__` demonstration but no advanced features.
 """
 
-from typing import Callable, Sequence, Tuple, Optional
+from typing import Callable, Sequence, Tuple, Optional, List
 import numpy as np
 
 
@@ -17,7 +17,8 @@ def PSO(
     num_particles: int = 30,
     max_iter: int = 100,
     seed: Optional[int] = None,
-) -> Tuple[np.ndarray, float]:
+    return_history: bool = False,
+) -> Tuple[np.ndarray, float] | Tuple[np.ndarray, float, List[float]]:
     """Minimal PSO minimizer.
 
     Parameters
@@ -57,6 +58,8 @@ def PSO(
     gbest = pbest[gbest_idx].copy()
     gbest_score = float(pbest_scores[gbest_idx])
 
+    history: List[float] = []
+
     for _ in range(max_iter):
         r1 = np.random.rand(num_particles, dim)
         r2 = np.random.rand(num_particles, dim)
@@ -77,6 +80,11 @@ def PSO(
             gbest_score = float(pbest_scores[min_idx])
             gbest = pbest[min_idx].copy()
 
+        if return_history:
+            history.append(gbest_score)
+
+    if return_history:
+        return gbest, gbest_score, history
     return gbest, gbest_score
 
 
